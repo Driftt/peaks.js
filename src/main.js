@@ -56,6 +56,7 @@ define('peaks', [
        * ```
        */
       dataUri:               null,
+      peakData:              null,
       /**
        * Will be used as a `xhr.responseType` if `dataUri` is a string, and not an object.
        * Here for backward compatibility purpose only.
@@ -205,8 +206,6 @@ define('peaks', [
     instance.seeking = false;
 
     instance.on("waveformOverviewReady", function () {
-      instance.waveform.openZoomView();
-
       if (instance.options.segments) { // Any initial segments to be displayed?
         instance.segments.addSegment(instance.options.segments);
       }

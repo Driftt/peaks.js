@@ -19,7 +19,7 @@ define([
 
   return function (peaks) {
     return {
-      init: function (ui) {
+      init: function (ui, peakData) {
         this.ui = ui; // See buildUi in main.js
         var that = this;
 
@@ -36,6 +36,11 @@ define([
         var uri = null;
         var requestType = null;
         var builder = null;
+
+        if (options.peakData) {
+          this.handleRemoteData(options.peakData, null);
+          return true;
+        }
 
         // Backward compatibility
         if (options.dataUri) {
@@ -107,6 +112,7 @@ define([
         this.waveformOverview = new WaveformOverview(overviewWaveformData, this.ui.overview, peaks);
 
         peaks.emit("waveformOverviewReady");
+        this.openZoomView();
         this.bindResize();
       },
 
